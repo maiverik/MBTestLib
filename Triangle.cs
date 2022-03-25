@@ -11,6 +11,14 @@ namespace MBTestLib
         public double side2 { get; }
         public double side3 { get; }
 
+        /// <summary>
+        /// Задать треугольник по 3м сторонам
+        /// </summary>
+        /// <param name="side1"></param>
+        /// <param name="side2"></param>
+        /// <param name="side3"></param>
+        /// <exception cref="ArgumentOutOfRangeException"></exception>
+        /// <exception cref="ArgumentException"></exception>
         public Triangle(double side1, double side2, double side3)
         {
             if (side1 < 0) throw new ArgumentOutOfRangeException(nameof(side1), "Side 1 is less then 0");
@@ -29,14 +37,17 @@ namespace MBTestLib
 
             
         }
-
+        /// <summary>
+        /// Вычислить площадь треугольника по 3м сторонам
+        /// </summary>
+        /// <returns></returns>
         public double CalcArea()
         {
             return AreaCalculator.CalcTriangleArea(side1, side2, side3);
         }
 
         /// <summary>
-        /// Определение прямоугольности треугольника по теореме Пифагора
+        /// Определить прямоугольность треугольника по теореме Пифагора
         /// </summary>
         /// <returns></returns>
         public bool IsTriangleRight()

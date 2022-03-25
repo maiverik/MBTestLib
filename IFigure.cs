@@ -7,6 +7,10 @@ namespace MBTestLib
     /// </summary>
     public interface IFigure
     {
+        /// <summary>
+        /// Вычислить площади фигуры
+        /// </summary>
+        /// <returns></returns>
         public double CalcArea();
     }
 }

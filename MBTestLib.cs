@@ -3,7 +3,12 @@
     public class AreaCalculator
     {
         #region Формально считаем площади, требуемые в задании с помощью статики.
-
+        /// <summary>
+        /// Вычисоление площади круга по его радиусу
+        /// </summary>
+        /// <param name="radius">радиус круга</param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentOutOfRangeException"></exception>
         public static double CalcCircleAreaByRadius(double radius)
         {
             if (radius < 0) throw new ArgumentOutOfRangeException(nameof(radius), "Circle raidus is less then 0");
@@ -11,6 +16,14 @@
             return Math.PI * Math.Pow(radius, 2);
         }
 
+        /// <summary>
+        /// Вычисление площади треугольника по 3м сторонам
+        /// </summary>
+        /// <param name="side1"></param>
+        /// <param name="side2"></param>
+        /// <param name="side3"></param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentOutOfRangeException"></exception>
         public static double CalcTriangleArea(double side1, double side2, double side3)
         {
             if (side1 < 0) throw new ArgumentOutOfRangeException(nameof(side1), "Circle raidus is less then 0");
@@ -31,13 +44,23 @@
         
 
         //Объявляем и инициализируем список фигур в конструкторе
+
+        /// <summary>
+        /// Список созданных фигур
+        /// </summary>
         public List<IFigure> Figures { get; }
+        
         public AreaCalculator()
         {
             Figures = new List<IFigure>();
         }
 
-        //Легко добавляем фигуру:)
+        //Легко добавляем фигуру :)
+
+        /// <summary>
+        /// Добавляет фигуру в список
+        /// </summary>
+        /// <param name="figure"></param>
         public void AddFigure(IFigure figure)
         {
             this.Figures.Add(figure);
