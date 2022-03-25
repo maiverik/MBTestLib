@@ -7,6 +7,7 @@ namespace MBTestLib
     /// </summary>
     public class Triangle : IFigure
     {
+        
         public double side1 { get; }
         public double side2 { get; }
         public double side3 { get; }
@@ -21,9 +22,9 @@ namespace MBTestLib
         /// <exception cref="ArgumentException"></exception>
         public Triangle(double side1, double side2, double side3)
         {
-            if (side1 < 0) throw new ArgumentOutOfRangeException(nameof(side1), "Side 1 is less then 0");
-            if (side2 < 0) throw new ArgumentOutOfRangeException(nameof(side2), "Side 2 is less then 0");
-            if (side3 < 0) throw new ArgumentOutOfRangeException(nameof(side3), "Side 3 is less then 0");
+            if (side1 <= 0) throw new ArgumentOutOfRangeException(nameof(side1), "Side 1 can't be equal or less then 0");
+            if (side2 <= 0) throw new ArgumentOutOfRangeException(nameof(side2), "Side 2 can't be equal or less then 0");
+            if (side3 <= 0) throw new ArgumentOutOfRangeException(nameof(side3), "Side 3 can't be equal or less then 0");
 
             if (!IsTriangleWithSidesPossible(side1, side2, side3)) throw new ArgumentException("Triangle is not possible with these sides");
             

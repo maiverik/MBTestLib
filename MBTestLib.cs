@@ -11,7 +11,7 @@
         /// <exception cref="ArgumentOutOfRangeException"></exception>
         public static double CalcCircleAreaByRadius(double radius)
         {
-            if (radius < 0) throw new ArgumentOutOfRangeException(nameof(radius), "Circle raidus is less then 0");
+            if (radius < 0) throw new ArgumentOutOfRangeException(nameof(radius), "Circle radius is less then 0");
             
             return Math.PI * Math.Pow(radius, 2);
         }
@@ -26,9 +26,9 @@
         /// <exception cref="ArgumentOutOfRangeException"></exception>
         public static double CalcTriangleArea(double side1, double side2, double side3)
         {
-            if (side1 < 0) throw new ArgumentOutOfRangeException(nameof(side1), "Circle raidus is less then 0");
-            if (side2 < 0) throw new ArgumentOutOfRangeException(nameof(side2), "Circle raidus is less then 0");
-            if (side3 < 0) throw new ArgumentOutOfRangeException(nameof(side3), "Circle raidus is less then 0");
+            if (side1 < 0) throw new ArgumentOutOfRangeException(nameof(side1), "Circle radius is less then 0");
+            if (side2 < 0) throw new ArgumentOutOfRangeException(nameof(side2), "Circle radius is less then 0");
+            if (side3 < 0) throw new ArgumentOutOfRangeException(nameof(side3), "Circle radius is less then 0");
             
             var p = (side1 + side2 + side3) / 2;
 
