@@ -8,19 +8,24 @@ namespace MBTestLib.Tests
     [TestClass()]
     public class AreaCalculatorTests
     {
+
         [TestMethod()]
         public void CalcCircleAreaByRadiusTest()
         {
 
-            Dictionary<double, double> testList = new Dictionary<double, double>();
-            testList.Add(1, 3.1415926535897931);
-            testList.Add(20, 1256.6370614359173);
-            testList.Add(400, 502654.82457436691);
+            //Dictionary<double, double> testList = new Dictionary<double, double>();
+            //testList.Add(1, 3.1415926535897931);
+            //testList.Add(20, 1256.6370614359173);
+            //testList.Add(400, 502654.82457436691);
 
-            foreach (var r in testList)
-            {
-                Assert.AreEqual(AreaCalculator.CalcCircleAreaByRadius(r.Key), r.Value);
-            }
+            //foreach (var r in testList)
+            //{
+            //    Assert.AreEqual(AreaCalculator.CalcCircleAreaByRadius(r.Key), r.Value);
+            //}
+
+            Assert.AreEqual(AreaCalculator.CalcCircleAreaByRadius(1), 3.1415926535897931);
+            Assert.AreEqual(AreaCalculator.CalcCircleAreaByRadius(20), 1256.6370614359173);
+            Assert.AreEqual(AreaCalculator.CalcCircleAreaByRadius(400), 502654.82457436691);
 
             Assert.ThrowsException<ArgumentOutOfRangeException>(new Action(() => AreaCalculator.CalcCircleAreaByRadius(-1)));
 
@@ -52,6 +57,11 @@ namespace MBTestLib.Tests
             AC.AddFigure(tr);
             Assert.AreEqual(AC.Figures.Count, 1);
             Assert.AreEqual(AC.Figures[0], tr);
+
+            Circle cr = new Circle(2);
+            AC.AddFigure(cr);
+            Assert.AreEqual(AC.Figures.Count, 2);
+            Assert.AreEqual(AC.Figures[1], cr);
         }
 
         

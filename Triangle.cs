@@ -49,6 +49,18 @@ namespace MBTestLib
             return !(s1s2 <= side3 || s1s3 <= side2 || s2s3 <= side1);
         }
 
+        public static bool IsTriangleRight(double side1, double side2, double side3)
+        {
+            double[] sides = { side1, side2, side3 };
+            var oSides = from side in sides
+                         orderby side descending
+                         select side;
+            var a = oSides.ElementAt(0);
+            var b = oSides.ElementAt(1);
+            var c = oSides.ElementAt(2);
+            return a * a - b * b - c * c <= double.Epsilon;
+        }
+
         /// <summary>
         /// Вычислить площадь треугольника по 3м сторонам
         /// </summary>
@@ -62,16 +74,9 @@ namespace MBTestLib
         /// Определить прямоугольность треугольника по теореме Пифагора
         /// </summary>
         /// <returns></returns>
-        public bool IsTriangleRight()
+        public bool IsThisTriangleRight()
         {
-            double[] sides = { side1, side2, side3 };
-            var oSides = from side in sides
-                         orderby side descending
-                         select side;
-            var a = oSides.ElementAt(0);
-            var b = oSides.ElementAt(1);
-            var c = oSides.ElementAt(2);
-            return a * a - b * b - c * c <= double.Epsilon;
+            return IsTriangleRight(this.side1, this.side2, this.side3);
         }
     }
 }

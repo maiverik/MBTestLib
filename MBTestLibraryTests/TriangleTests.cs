@@ -14,11 +14,11 @@ namespace MBTestLib.Tests
         [TestMethod()]
         public void TriangleTest()
         {
-            
             Triangle tr = new Triangle(4, 5, 6);
             Assert.AreEqual(tr.side1, 4);
             Assert.AreEqual(tr.side2, 5);
             Assert.AreEqual(tr.side3, 6);
+            Assert.ThrowsException<ArgumentException>(new Action(() => tr = new Triangle(1, 2, 1)));
         }
 
         [TestMethod()]
@@ -35,17 +35,30 @@ namespace MBTestLib.Tests
         public void IsTrianlgeRightTest()
         {
             
-            Triangle tr = new Triangle(4, 5, 6);
             Dictionary<double[], bool> testList = new Dictionary<double[], bool>();
             testList.Add(new double[] { 3, 4, 5 }, true);
             testList.Add(new double[] { 5, 3, 4 }, true);
             testList.Add(new double[] { 3, 6, 5 }, false);
             foreach (var r in testList)
             {
-                tr = new Triangle(r.Key[0], r.Key[1], r.Key[2]);
-                Assert.AreEqual(tr.IsTriangleRight(), r.Value);
+                Assert.AreEqual(Triangle.IsTriangleRight(r.Key[0],r.Key[1],r.Key[2]), r.Value);
             }
         }
+
+        [TestMethod()]
+        public void IsThisTrianlgeRightTest()
+        {
+            Dictionary<double[], bool> testList = new Dictionary<double[], bool>();
+            testList.Add(new double[] { 3, 4, 5 }, true);
+            testList.Add(new double[] { 5, 3, 4 }, true);
+            testList.Add(new double[] { 3, 6, 5 }, false);
+            foreach (var r in testList)
+            {
+                Triangle tr = new Triangle(r.Key[0], r.Key[1], r.Key[2]);
+                Assert.AreEqual(tr.IsThisTriangleRight(), r.Value);
+            }
+        }
+
         [TestMethod()]
         public void IsTriangleWithSidesPossibleTest()
         {
