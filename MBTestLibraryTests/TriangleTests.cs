@@ -14,9 +14,7 @@ namespace MBTestLib.Tests
         [TestMethod()]
         public void TriangleTest()
         {
-            Assert.ThrowsException<ArgumentException>(new Action(() => { Triangle tr = new Triangle(1, 2, 3); }));
-            Assert.ThrowsException<ArgumentException>(new Action(() => { Triangle tr = new Triangle(3, 2, 1); }));
-            Assert.ThrowsException<ArgumentException>(new Action(() => { Triangle tr = new Triangle(2, 3, 1); }));
+            
             Triangle tr = new Triangle(4, 5, 6);
             Assert.AreEqual(tr.side1, 4);
             Assert.AreEqual(tr.side2, 5);
@@ -47,6 +45,13 @@ namespace MBTestLib.Tests
                 tr = new Triangle(r.Key[0], r.Key[1], r.Key[2]);
                 Assert.AreEqual(tr.IsTriangleRight(), r.Value);
             }
+        }
+        [TestMethod()]
+        public void IsTriangleWithSidesPossibleTest()
+        {
+            Assert.AreEqual(Triangle.IsTriangleWithSidesPossible(1, 2, 3), false);
+            Assert.AreEqual(Triangle.IsTriangleWithSidesPossible(3, 2, 1), false);
+            Assert.AreEqual(Triangle.IsTriangleWithSidesPossible(2, 3, 1), false);
         }
     }
 }

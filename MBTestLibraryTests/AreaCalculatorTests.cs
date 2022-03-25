@@ -53,5 +53,7 @@ namespace MBTestLib.Tests
             Assert.AreEqual(AC.Figures.Count, 1);
             Assert.AreEqual(AC.Figures[0], tr);
         }
+
+        
     }
 }
