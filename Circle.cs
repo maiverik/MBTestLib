@@ -1,34 +1,34 @@
-﻿
+﻿using static MBTestLib.GeometrySolver;
 namespace MBTestLib
 {
     /// <summary>
-    /// Класс для задания круга.
+    /// Представляет фигуру "Круг" и методы работы с ней.
     /// </summary>
     public class Circle : IFigure
     {
         /// <summary>
-        /// Радиус круга
+        /// Возвращает радиус круга
         /// </summary>
-        public double radius { get; set; }
+        public double Radius { get; }
 
         /// <summary>
-        /// Задать круг через его радиус
+        /// Инициализирует новый экземпляр класса <see cref="Circle"/> по радиусу круга
         /// </summary>
         /// <param name="radius"></param>
         /// <exception cref="ArgumentOutOfRangeException"></exception>
         public Circle(double radius)
         {
             if (radius < 0) throw new ArgumentOutOfRangeException(nameof(radius), "Circle raidus is less then 0");
-            this.radius = radius;
+            this.Radius = radius;
         }
 
         /// <summary>
-        /// Вычислить площадь круга
+        /// Возвращает площадь круга
         /// </summary>
         /// <returns></returns>
         public double CalcArea()
         {
-            return AreaCalculator.CalcCircleAreaByRadius(radius);
+            return CalcCircleAreaByRadius(Radius);
         }
 
 

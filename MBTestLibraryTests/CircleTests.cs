@@ -17,16 +17,16 @@ namespace MBTestLib.Tests
             const int r = 4;
             Circle cr = new Circle(r);
             Assert.IsNotNull(cr);
-            Assert.AreEqual(cr.radius, r);
+            Assert.AreEqual(cr.Radius, r);
         }
 
         [TestMethod()]
         public void CalcAreaTest()
         {
-            for (int r = 4; r < 6; r++)
+            for (int r = 4; r <= 6; r++)
             {
                 Circle tr = new Circle(r);
-                Assert.AreEqual(tr.CalcArea(), AreaCalculator.CalcCircleAreaByRadius(r));
+                Assert.AreEqual(tr.CalcArea(), GeometrySolver.CalcCircleAreaByRadius(r));
             }
             
         }

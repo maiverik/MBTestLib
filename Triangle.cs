@@ -1,25 +1,29 @@
-﻿
+﻿using static MBTestLib.GeometrySolver;
 
 namespace MBTestLib
 {
     /// <summary>
-    /// Класс для задания треугольника. Ограничимся тем что наш треугольник можно задать только по 3м сторонам.
+    /// Представляет фигуру "Треугольник" и методы работы с ней.
     /// </summary>
+    /// <remarks>
+    /// Ограничимся тем, что наш треугольник можно задать только по 3м сторонам.
+    /// </remarks>
     public class Triangle : IFigure
     {
-        
-        public double side1 { get; }
-        public double side2 { get; }
-        public double side3 { get; }
+       
+
+        public double Side1 { get; }
+        public double Side2 { get; }
+        public double Side3 { get; }
 
         /// <summary>
-        /// Задать треугольник по 3м сторонам
+        /// Инициализирует новый экземпляр класса <see cref="Triangle"/> по 3м сторонам
         /// </summary>
         /// <param name="side1"></param>
         /// <param name="side2"></param>
         /// <param name="side3"></param>
-        /// <exception cref="ArgumentOutOfRangeException"></exception>
-        /// <exception cref="ArgumentException"></exception>
+        /// <exception cref="ArgumentOutOfRangeException">Размер стороны меньше или равен 0</exception>
+        /// <exception cref="ArgumentException">Если треугольник с указанными сторонами невозможен</exception>
         public Triangle(double side1, double side2, double side3)
         {
             if (side1 <= 0) throw new ArgumentOutOfRangeException(nameof(side1), "Side 1 can't be equal or less then 0");
@@ -28,56 +32,28 @@ namespace MBTestLib
 
             if (!IsTriangleWithSidesPossible(side1, side2, side3)) throw new ArgumentException("Triangle is not possible with these sides");
             
-            this.side1 = side1;
-            this.side2 = side2;
-            this.side3 = side3;
+            this.Side1 = side1;
+            this.Side2 = side2;
+            this.Side3 = side3;
             
         }
 
         /// <summary>
-        /// Возможен ли треугольник с заданными сторонами
-        /// </summary>
-        /// <param name="side1"></param>
-        /// <param name="side2"></param>
-        /// <param name="side3"></param>
-        /// <returns></returns>
-        public static bool IsTriangleWithSidesPossible(double side1, double side2, double side3)
-        {
-            var s1s2 = side1 + side2;
-            var s1s3 = side1 + side3;
-            var s2s3 = side2 + side3;
-
-            return !(s1s2 <= side3 || s1s3 <= side2 || s2s3 <= side1);
-        }
-
-        public static bool IsTriangleRight(double side1, double side2, double side3)
-        {
-            double[] sides = { side1, side2, side3 };
-            var oSides = from side in sides
-                         orderby side descending
-                         select side;
-            var a = oSides.ElementAt(0);
-            var b = oSides.ElementAt(1);
-            var c = oSides.ElementAt(2);
-            return a * a - b * b - c * c <= double.Epsilon;
-        }
-
-        /// <summary>
-        /// Вычислить площадь треугольника по 3м сторонам
+        /// Вычисляет площадь треугольника
         /// </summary>
         /// <returns></returns>
         public double CalcArea()
         {
-            return AreaCalculator.CalcTriangleArea(side1, side2, side3);
+            return CalcTriangleArea(Side1, Side2, Side3);
         }
 
         /// <summary>
-        /// Определить прямоугольность треугольника по теореме Пифагора
+        /// Определяет является ли треугольник прямоугольным
         /// </summary>
         /// <returns></returns>
         public bool IsThisTriangleRight()
         {
-            return IsTriangleRight(this.side1, this.side2, this.side3);
+            return IsTriangleRight(this.Side1, this.Side2, this.Side3);
         }
     }
 }

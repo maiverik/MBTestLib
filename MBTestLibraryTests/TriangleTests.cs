@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static MBTestLib.GeometrySolver;
 
 namespace MBTestLib.Tests
 {
@@ -15,9 +16,9 @@ namespace MBTestLib.Tests
         public void TriangleTest()
         {
             Triangle tr = new Triangle(4, 5, 6);
-            Assert.AreEqual(tr.side1, 4);
-            Assert.AreEqual(tr.side2, 5);
-            Assert.AreEqual(tr.side3, 6);
+            Assert.AreEqual(tr.Side1, 4);
+            Assert.AreEqual(tr.Side2, 5);
+            Assert.AreEqual(tr.Side3, 6);
             Assert.ThrowsException<ArgumentException>(new Action(() => tr = new Triangle(1, 2, 1)));
         }
 
@@ -25,46 +26,38 @@ namespace MBTestLib.Tests
         public void CalcAreaTest()
         {
             Triangle tr = new Triangle(4, 5, 6);
-            Assert.AreEqual(tr.CalcArea(), AreaCalculator.CalcTriangleArea(4, 5, 6));
+            Assert.AreEqual(tr.CalcArea(), GeometrySolver.CalcTriangleArea(4, 5, 6));
 
             tr = new Triangle(7, 8, 9);
-            Assert.AreEqual(tr.CalcArea(), AreaCalculator.CalcTriangleArea(7, 8, 9));
+            Assert.AreEqual(tr.CalcArea(), GeometrySolver.CalcTriangleArea(7, 8, 9));
         }
 
         [TestMethod()]
         public void IsTrianlgeRightTest()
         {
-            
-            Dictionary<double[], bool> testList = new Dictionary<double[], bool>();
-            testList.Add(new double[] { 3, 4, 5 }, true);
-            testList.Add(new double[] { 5, 3, 4 }, true);
-            testList.Add(new double[] { 3, 6, 5 }, false);
-            foreach (var r in testList)
-            {
-                Assert.AreEqual(Triangle.IsTriangleRight(r.Key[0],r.Key[1],r.Key[2]), r.Value);
-            }
+            Assert.AreEqual(IsTriangleRight(3, 4, 5),true);
+            Assert.AreEqual(IsTriangleRight(5, 3, 4), true);
+            Assert.AreEqual(IsTriangleRight(3, 6, 5), false);
+
         }
 
         [TestMethod()]
         public void IsThisTrianlgeRightTest()
         {
-            Dictionary<double[], bool> testList = new Dictionary<double[], bool>();
-            testList.Add(new double[] { 3, 4, 5 }, true);
-            testList.Add(new double[] { 5, 3, 4 }, true);
-            testList.Add(new double[] { 3, 6, 5 }, false);
-            foreach (var r in testList)
-            {
-                Triangle tr = new Triangle(r.Key[0], r.Key[1], r.Key[2]);
-                Assert.AreEqual(tr.IsThisTriangleRight(), r.Value);
-            }
+            Triangle tr = new Triangle(3,4,5);
+            Assert.AreEqual(tr.IsThisTriangleRight(), true);
+            tr = new Triangle(5,3,4);
+            Assert.AreEqual(tr.IsThisTriangleRight(), true);
+            tr = new Triangle(3,6,5);
+            Assert.AreEqual(tr.IsThisTriangleRight(), false);
         }
 
         [TestMethod()]
         public void IsTriangleWithSidesPossibleTest()
         {
-            Assert.AreEqual(Triangle.IsTriangleWithSidesPossible(1, 2, 3), false);
-            Assert.AreEqual(Triangle.IsTriangleWithSidesPossible(3, 2, 1), false);
-            Assert.AreEqual(Triangle.IsTriangleWithSidesPossible(2, 3, 1), false);
+            Assert.AreEqual(IsTriangleWithSidesPossible(1, 2, 3), false);
+            Assert.AreEqual(IsTriangleWithSidesPossible(3, 2, 1), false);
+            Assert.AreEqual(IsTriangleWithSidesPossible(2, 3, 1), false);
         }
     }
 }

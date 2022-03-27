@@ -3,12 +3,12 @@
 namespace MBTestLib
 {
     /// <summary>
-    /// Интерфейс абстрактной фигуры
+    /// Описывает абстрактную фигуру
     /// </summary>
     public interface IFigure
     {
         /// <summary>
-        /// Вычислить площади фигуры
+        /// Вычисляет площадь фигуры
         /// </summary>
         /// <returns></returns>
         public double CalcArea();
