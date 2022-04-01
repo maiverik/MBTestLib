@@ -1,16 +1,14 @@
-﻿
-
-namespace MBTestLib
+﻿namespace MBTestLib
 {
     /// <summary>
     /// Описывает абстрактную фигуру
     /// </summary>
-    public interface IFigure
+    public abstract class Figure
     {
         /// <summary>
-        /// Вычисляет площадь фигуры
+        /// Возвращает площадь фигуры
         /// </summary>
         /// <returns></returns>
-        public double CalcArea();
+        public abstract double Area { get; }
     }
 }
