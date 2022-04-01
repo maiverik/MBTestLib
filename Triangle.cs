@@ -9,8 +9,6 @@ namespace MBTestLib
     /// </remarks>
     public class Triangle : Figure
     {
-
-
         public double Side1 { get; }
         public double Side2 { get; }
         public double Side3 { get; }
