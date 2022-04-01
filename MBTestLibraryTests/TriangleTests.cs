@@ -1,11 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using MBTestLib;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using static MBTestLib.GeometrySolver;
 
 namespace MBTestLib.Tests
 {
@@ -13,51 +7,57 @@ namespace MBTestLib.Tests
     public class TriangleTests
     {
         [TestMethod()]
-        public void TriangleTest()
+        [DataRow(0, 1, -1)]
+        [DataRow(-1, 0, 1)]
+        [DataRow(1, -1, 0)]
+        public void TriangleSidesZeroOrLessTest(double a, double b, double c)
         {
-            Triangle tr = new Triangle(4, 5, 6);
-            Assert.AreEqual(tr.Side1, 4);
-            Assert.AreEqual(tr.Side2, 5);
-            Assert.AreEqual(tr.Side3, 6);
+            Triangle trianlge;
+            Assert.ThrowsException<ArgumentOutOfRangeException>(new Action(() => trianlge = new Triangle(a, b, c)));
+        }
+
+        [TestMethod()]
+        [DataRow(2, 1, 1)]
+        [DataRow(1, 2, 1)]
+        [DataRow(1, 1, 2)]
+        public void TriangleNotPossibleTest(double a, double b, double c)
+        {
+            Triangle tr;
             Assert.ThrowsException<ArgumentException>(new Action(() => tr = new Triangle(1, 2, 1)));
         }
 
         [TestMethod()]
-        public void CalcAreaTest()
+        [DataRow(3, 4, 5)]
+        [DataRow(5, 4, 3)]
+        [DataRow(4, 3, 5)]
+        [DataRow(4.4, 3.3, 5.5)]
+        public void TriangleSidesSetCorrectTest(double a, double b, double c)
         {
-            Triangle tr = new Triangle(4, 5, 6);
-            Assert.AreEqual(tr.CalcArea(), GeometrySolver.CalcTriangleArea(4, 5, 6));
-
-            tr = new Triangle(7, 8, 9);
-            Assert.AreEqual(tr.CalcArea(), GeometrySolver.CalcTriangleArea(7, 8, 9));
+            Triangle tr = new Triangle(a, b, c);
+            Assert.AreEqual(a, tr.Side1, double.Epsilon);
+            Assert.AreEqual(b, tr.Side2, double.Epsilon);
+            Assert.AreEqual(c, tr.Side3, double.Epsilon);
         }
 
         [TestMethod()]
-        public void IsTrianlgeRightTest()
+        [DataRow(3, 4, 5, 6)]
+        [DataRow(5, 3, 4, 6)]
+        [DataRow(3, 6, 5, 7.4833)]
+        [DataRow(3, 6, 8, 7.6444)]
+        public void CalcTriangleAreaTest(double a, double b, double c, double expected)
         {
-            Assert.AreEqual(IsTriangleRight(3, 4, 5),true);
-            Assert.AreEqual(IsTriangleRight(5, 3, 4), true);
-            Assert.AreEqual(IsTriangleRight(3, 6, 5), false);
-
+            Triangle tr = new Triangle(a, b, c);
+            Assert.AreEqual(expected, tr.Area);
         }
 
         [TestMethod()]
-        public void IsThisTrianlgeRightTest()
+        [DataRow(3, 4, 5, true)]
+        [DataRow(5, 3, 4, true)]
+        [DataRow(3, 6, 5, false)]
+        public void IsTriangleRightTest(double a, double b, double c, bool expected)
         {
-            Triangle tr = new Triangle(3,4,5);
-            Assert.AreEqual(tr.IsThisTriangleRight(), true);
-            tr = new Triangle(5,3,4);
-            Assert.AreEqual(tr.IsThisTriangleRight(), true);
-            tr = new Triangle(3,6,5);
-            Assert.AreEqual(tr.IsThisTriangleRight(), false);
-        }
-
-        [TestMethod()]
-        public void IsTriangleWithSidesPossibleTest()
-        {
-            Assert.AreEqual(IsTriangleWithSidesPossible(1, 2, 3), false);
-            Assert.AreEqual(IsTriangleWithSidesPossible(3, 2, 1), false);
-            Assert.AreEqual(IsTriangleWithSidesPossible(2, 3, 1), false);
+            Triangle tr = new Triangle(a, b, c);
+            Assert.AreEqual(tr.IsRight, expected);
         }
     }
 }

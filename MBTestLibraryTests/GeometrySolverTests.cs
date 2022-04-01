@@ -1,44 +1,40 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using MBTestLib;
-using System.Collections.Generic;
+﻿using MBTestLib;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using static MBTestLib.GeometrySolver;
 
 namespace MBTestLib.Tests
 {
     [TestClass()]
     public class GeometrySolverTests
     {
-
         [TestMethod()]
-        public void CalcCircleAreaByRadiusTest()
+        [DataRow(3, 4, 5, 6)]
+        [DataRow(5, 3, 4, 6)]
+        [DataRow(3, 6, 5, 7.4833)]
+        [DataRow(3, 6, 8, 7.6444)]
+        public void CalcTriangleAreaTest(double a, double b, double c, double expected)
         {
-
-            Assert.AreEqual(GeometrySolver.CalcCircleAreaByRadius(1), 3.1415926535897931);
-            Assert.AreEqual(GeometrySolver.CalcCircleAreaByRadius(20), 1256.6370614359173);
-            Assert.AreEqual(GeometrySolver.CalcCircleAreaByRadius(400), 502654.82457436691);
-
-            Assert.ThrowsException<ArgumentOutOfRangeException>(new Action(() => GeometrySolver.CalcCircleAreaByRadius(-1)));
-
+            Assert.AreEqual(expected, CalculateTriangleArea(a, b, c));
         }
 
         [TestMethod()]
-        public void CalcTriangleAreaBySidesTest()
+        [DataRow(3, 4, 5, true)]
+        [DataRow(5, 3, 4, true)]
+        [DataRow(3, 6, 5, false)]
+        public void IsTriangleRightTest(double a, double b, double c, bool expected)
         {
-
-            Assert.AreEqual(GeometrySolver.CalcTriangleArea(3, 4, 5), 6);
-            Assert.AreEqual(GeometrySolver.CalcTriangleArea(5, 3, 4), 6);
-            Assert.AreEqual(GeometrySolver.CalcTriangleArea(3, 6, 5), 7.4833147735478827);
-            Assert.AreEqual(GeometrySolver.CalcTriangleArea(3, 6, 8), 7.6444424257103281);
-
-            Assert.ThrowsException<ArgumentOutOfRangeException>(new Action(() => GeometrySolver.CalcTriangleArea(-1, 1, 1)));
-            Assert.ThrowsException<ArgumentOutOfRangeException>(new Action(() => GeometrySolver.CalcTriangleArea(1, -1, 1)));
-            Assert.ThrowsException<ArgumentOutOfRangeException>(new Action(() => GeometrySolver.CalcTriangleArea(1, 1, -1)));
+            Assert.AreEqual(expected, IsTriangleRight(a, b, c));
         }
 
         [TestMethod()]
-        public void CreateFiguresListTest()
+        [DataRow(1, 3.1416)]
+        [DataRow(20, 1256.6371)]
+        [DataRow(2.5, 19.6350)]
+        public void CalcCircleAreaTest(double r, double expected)
         {
-            Assert.AreEqual(GeometrySolver.CreateFiguresList() > 0, true);
+            Assert.AreEqual(expected, CalculateCircleArea(r));
         }
+
+        
     }
 }

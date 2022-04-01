@@ -1,10 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using MBTestLib;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MBTestLib.Tests
 {
@@ -12,23 +7,31 @@ namespace MBTestLib.Tests
     public class CircleTests
     {
         [TestMethod()]
-        public void CircleTest()
+        [DataRow(0)]
+        [DataRow(-1)]
+        public void CircleRadiusZeroOrLessTest(double r)
         {
-            const int r = 4;
-            Circle cr = new Circle(r);
-            Assert.IsNotNull(cr);
-            Assert.AreEqual(cr.Radius, r);
+            Circle circle;
+            Assert.ThrowsException<ArgumentOutOfRangeException>(new Action(() => circle = new Circle(r)));
         }
 
         [TestMethod()]
-        public void CalcAreaTest()
+        [DataRow(1)]
+        [DataRow(2.5)]
+        public void CircleRadiusSetCorrectTest(double r)
         {
-            for (int r = 4; r <= 6; r++)
-            {
-                Circle tr = new Circle(r);
-                Assert.AreEqual(tr.CalcArea(), GeometrySolver.CalcCircleAreaByRadius(r));
-            }
-            
+            Circle cr = new Circle(r);
+            Assert.AreEqual(r, cr.Radius);
+        }
+
+        [TestMethod()]
+        [DataRow(1, 3.1416)]
+        [DataRow(20, 1256.6371)]
+        [DataRow(2.5, 19.6350)]
+        public void CalcCircleAreaTest(double r, double expected)
+        {
+            var circle = new Circle(r);
+            Assert.AreEqual(expected, circle.Area);
         }
     }
 }
