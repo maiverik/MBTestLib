@@ -8,7 +8,7 @@ namespace MBTestLib.Tests
     {
         [TestMethod()]
         [DataRow(0)]
-        [DataRow(-1)]
+        [DataRow(-1,DisplayName = "test123")]
         public void CircleRadiusZeroOrLessTest(double r)
         {
             Circle circle;

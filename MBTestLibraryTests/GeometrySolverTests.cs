@@ -1,5 +1,4 @@
-﻿using MBTestLib;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using static MBTestLib.GeometrySolver;
 
 namespace MBTestLib.Tests
@@ -35,6 +34,13 @@ namespace MBTestLib.Tests
             Assert.AreEqual(expected, CalculateCircleArea(r));
         }
 
-        
+        [TestMethod()]
+        [DataRow(1)]
+        [DataRow(2.5)]
+        public void GetAreaTest(double r)
+        {
+            var cr = new Circle(r);
+            Assert.AreEqual(cr.Area, GetArea(cr));
+        }
     }
 }

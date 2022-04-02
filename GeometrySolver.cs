@@ -35,5 +35,15 @@
         {
             return new Triangle(side1, side2, side3).IsRight;
         }
+
+        /// <summary>
+        /// Возвращает площадь произвольной фигуры
+        /// </summary>
+        /// <param name="fig"></param>
+        /// <returns></returns>
+        public static double GetArea(Figure fig)
+        {
+            return fig.Area;
+        }
     }
 }
