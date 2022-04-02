@@ -7,9 +7,12 @@ namespace MBTestLib.Tests
     public class TriangleTests
     {
         [TestMethod()]
-        [DataRow(0, 1, -1)]
-        [DataRow(-1, 0, 1)]
-        [DataRow(1, -1, 0)]
+        [DataRow(0, 1, 1)]
+        [DataRow(-1, 1, 1)]
+        [DataRow(1, -1, 1)]
+        [DataRow(1, 0, 1)]
+        [DataRow(1, 1, -1)]
+        [DataRow(1, 1, 0)]
         public void TriangleSidesZeroOrLessTest(double a, double b, double c)
         {
             Triangle trianlge;

@@ -1,4 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Collections.Generic;
 using static MBTestLib.GeometrySolver;
 
 namespace MBTestLib.Tests
@@ -37,10 +38,19 @@ namespace MBTestLib.Tests
         [TestMethod()]
         [DataRow(1)]
         [DataRow(2.5)]
-        public void GetFigureAreaTest(double r)
+        public void GetCircleFigureAreaTest(double r)
         {
             var cr = new Circle(r);
             Assert.AreEqual(cr.Area, GetFigureArea(cr));
+        }
+
+        [TestMethod()]
+        [DataRow(3, 4, 5)]
+        [DataRow(5, 3, 6)]
+        public void GetTriangleFigureAreaTest(double a, double b, double c)
+        {
+            var tr = new Triangle(a, b, c);
+            Assert.AreEqual(tr.Area, GetFigureArea(tr));
         }
     }
 }
