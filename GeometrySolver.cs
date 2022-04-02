@@ -41,7 +41,7 @@
         /// </summary>
         /// <param name="fig"></param>
         /// <returns></returns>
-        public static double GetArea(Figure fig)
+        public static double GetFigureArea(Figure fig)
         {
             return fig.Area;
         }

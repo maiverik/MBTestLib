@@ -37,10 +37,10 @@ namespace MBTestLib.Tests
         [TestMethod()]
         [DataRow(1)]
         [DataRow(2.5)]
-        public void GetAreaTest(double r)
+        public void GetFigureAreaTest(double r)
         {
             var cr = new Circle(r);
-            Assert.AreEqual(cr.Area, GetArea(cr));
+            Assert.AreEqual(cr.Area, GetFigureArea(cr));
         }
     }
 }
