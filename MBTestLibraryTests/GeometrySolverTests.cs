@@ -36,21 +36,23 @@ namespace MBTestLib.Tests
         }
 
         [TestMethod()]
-        [DataRow(1)]
-        [DataRow(2.5)]
-        public void GetCircleFigureAreaTest(double r)
+        [DataRow(1, 3.1416)]
+        [DataRow(20, 1256.6371)]
+        [DataRow(2.5, 19.6350)]
+        public void GetCircleFigureAreaTest(double r, double expected)
         {
             var cr = new Circle(r);
-            Assert.AreEqual(cr.Area, GetFigureArea(cr));
+            Assert.AreEqual(expected, GetFigureArea(cr));
         }
 
         [TestMethod()]
-        [DataRow(3, 4, 5)]
-        [DataRow(5, 3, 6)]
-        public void GetTriangleFigureAreaTest(double a, double b, double c)
+        [DataRow(3, 4, 5, 6)]
+        [DataRow(5, 3, 4, 6)]
+        [DataRow(3, 6, 5, 7.4833)]
+        public void GetTriangleFigureAreaTest(double a, double b, double c, double expected)
         {
             var tr = new Triangle(a, b, c);
-            Assert.AreEqual(tr.Area, GetFigureArea(tr));
+            Assert.AreEqual(expected, GetFigureArea(tr));
         }
     }
 }
