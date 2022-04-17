@@ -26,7 +26,7 @@ namespace MBTestLib.Tests
         public void TriangleNotPossibleTest(double a, double b, double c)
         {
             Triangle tr;
-            Assert.ThrowsException<ArgumentException>(new Action(() => tr = new Triangle(1, 2, 1)));
+            Assert.ThrowsException<ArgumentException>(new Action(() => tr = new Triangle(a, b, c)));
         }
 
         [TestMethod()]
